@@ -9,19 +9,19 @@ import (
 	"github.com/skiv71/go-shit/internal/candle"
 )
 
-type Subscribe struct {
+type subscribe struct {
 	Method       string              `json:"method"`
 	Subscription candle.Subscription `json:"subscription"`
 }
 
-func subscribeMessage() []byte {
+func subscribeMessage(coin *string, interval uint) []byte {
 
-	d := Subscribe{
+	d := subscribe{
 		Method: `subscribe`,
 		Subscription: candle.Subscription{
 			Type:     `candle`,
-			Coin:     `xyz:SP500`,
-			Interval: `5m`,
+			Coin:     *coin,
+			Interval: candle.Interval(interval),
 		},
 	}
 
@@ -35,12 +35,12 @@ func subscribeMessage() []byte {
 
 }
 
-type Message struct {
+type message struct {
 	Channel string      `json:"channel"`
 	Data    candle.Data `json:"data"`
 }
 
-func Feed(feed chan candle.Object) {
+func Feed(coin string, interval uint, feed chan candle.Object) {
 
 	u := url.URL{
 		Scheme: "wss",
@@ -57,7 +57,7 @@ func Feed(feed chan candle.Object) {
 		panic(err)
 	}
 
-	subscribe := subscribeMessage()
+	subscribe := subscribeMessage(&coin, interval)
 
 	log.Print("send: ", string(subscribe))
 
@@ -72,7 +72,7 @@ func Feed(feed chan candle.Object) {
 			log.Println(err)
 		}
 
-		m := Message{}
+		m := message{}
 
 		if err := json.Unmarshal(data, &m); err != nil {
 			log.Println(err)

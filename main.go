@@ -10,6 +10,10 @@ import (
 	"github.com/skiv71/go-shit/internal/exchange"
 )
 
+const COIN = `xyz:SP500`
+
+const INTERVAL uint = 300
+
 func main() {
 
 	collection := "candles"
@@ -25,7 +29,7 @@ func main() {
 	feed := make(chan candle.Object)
 
 	wg.Go(func() {
-		exchange.Feed(feed)
+		exchange.Feed(COIN, INTERVAL, feed)
 	})
 
 	for {

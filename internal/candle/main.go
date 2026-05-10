@@ -35,6 +35,20 @@ type Subscription struct {
 	Interval string `json:"interval"`
 }
 
+func Interval(secs uint) string {
+	switch secs {
+	case 60:
+		return `1m`
+	case 300:
+		return `5m`
+	case 900:
+		return `15m`
+	case 3600:
+		return `1h`
+	}
+	panic("Invalid interval value!")
+}
+
 func parseInterval(s *string) int {
 	v := 0
 	suffix := map[string]int{
