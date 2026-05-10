@@ -1,1 +1,1 @@
-./data/candles
+data/candles/*.json
