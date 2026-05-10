@@ -14,14 +14,14 @@ type subscribe struct {
 	Subscription candle.Subscription `json:"subscription"`
 }
 
-func subscribeMessage(coin *string, interval uint) []byte {
+func subscribeMessage(coin *string, interval *string) []byte {
 
 	d := subscribe{
 		Method: `subscribe`,
 		Subscription: candle.Subscription{
 			Type:     `candle`,
 			Coin:     *coin,
-			Interval: candle.Interval(interval),
+			Interval: *interval,
 		},
 	}
 
@@ -40,7 +40,7 @@ type message struct {
 	Data    candle.Data `json:"data"`
 }
 
-func Feed(coin string, interval uint, feed chan candle.Object) {
+func Feed(coin string, interval string, feed chan candle.Object) {
 
 	u := url.URL{
 		Scheme: "wss",
@@ -57,7 +57,7 @@ func Feed(coin string, interval uint, feed chan candle.Object) {
 		panic(err)
 	}
 
-	subscribe := subscribeMessage(&coin, interval)
+	subscribe := subscribeMessage(&coin, &interval)
 
 	log.Print("send: ", string(subscribe))
 

@@ -6,21 +6,14 @@ This is a short [Go](https://go.dev/) project for acquiring [hyperfluid](https:/
 
 The data is parsed and written to a local [json](https://github.com/sdomino/scribble) database.
 
-### Configuration
-
-The default config is: -
-
-```go
-COIN = "xyz:SP500"
-INTERVAL = 300 // (5m)
-```
-
-This can be changed in the ./main.go file
-
 ### Usage
 
 To build / run
 
 ```shell
-go [build / run] main.go
+go [build / run] main.go -coin=<coin> -interval=<1m|5m|15m|1h>
+
+// (defaults)
+// coin: xyz:SP500
+// interval: 5m
 ```

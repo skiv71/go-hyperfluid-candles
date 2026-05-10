@@ -8,7 +8,7 @@ import (
 
 type Object struct {
 	Coin      string `json:"coin"`
-	Interval  int    `json:"interval"`
+	Interval  string `json:"interval"`
 	Open      string `json:"open"`
 	High      string `json:"high"`
 	Low       string `json:"low"`
@@ -35,21 +35,7 @@ type Subscription struct {
 	Interval string `json:"interval"`
 }
 
-func Interval(secs uint) string {
-	switch secs {
-	case 60:
-		return `1m`
-	case 300:
-		return `5m`
-	case 900:
-		return `15m`
-	case 3600:
-		return `1h`
-	}
-	panic("Invalid interval value!")
-}
-
-func parseInterval(s *string) int {
+func Interval(s *string) int {
 	v := 0
 	suffix := map[string]int{
 		"m": 60,
@@ -87,7 +73,7 @@ func parseTimestamp(v int64) string {
 func Parse(data *Data) Object {
 	return Object{
 		Coin:      data.Coin,
-		Interval:  parseInterval(&data.Interval),
+		Interval:  data.Interval,
 		Open:      parseFloat(&data.Open),
 		High:      parseFloat(&data.High),
 		Low:       parseFloat(&data.Low),

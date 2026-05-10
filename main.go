@@ -7,16 +7,17 @@ import (
 
 	"github.com/sdomino/scribble"
 	"github.com/skiv71/go-shit/internal/candle"
+	"github.com/skiv71/go-shit/internal/config"
 	"github.com/skiv71/go-shit/internal/exchange"
 )
-
-const COIN = `xyz:SP500`
-
-const INTERVAL uint = 300
 
 func main() {
 
 	collection := "candles"
+
+	cfg := config.Get()
+
+	log.Print("config: ", cfg)
 
 	db, err := scribble.New("./data/", nil)
 
@@ -29,7 +30,7 @@ func main() {
 	feed := make(chan candle.Object)
 
 	wg.Go(func() {
-		exchange.Feed(COIN, INTERVAL, feed)
+		exchange.Feed(cfg.Coin, cfg.Interval, feed)
 	})
 
 	for {
