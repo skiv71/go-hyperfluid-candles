@@ -15,6 +15,7 @@ type Subscribe struct {
 }
 
 func subscribeMessage() []byte {
+
 	d := Subscribe{
 		Method: `subscribe`,
 		Subscription: candle.Subscription{
@@ -23,11 +24,15 @@ func subscribeMessage() []byte {
 			Interval: `5m`,
 		},
 	}
+
 	j, e := json.Marshal(d)
+
 	if e != nil {
 		panic(e)
 	}
+
 	return j
+
 }
 
 type Message struct {
