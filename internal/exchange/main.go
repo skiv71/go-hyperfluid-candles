@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"github.com/gorilla/websocket"
-	"github.com/skiv71/go-shit/internal/candle"
+	"github.com/skiv71/hyperfluid/internal/candle"
 )
 
 type subscribe struct {

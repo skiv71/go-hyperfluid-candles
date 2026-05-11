@@ -2,16 +2,22 @@
 
 ### Description
 
-This is a short [Go](https://go.dev/) project for acquiring [hyperfluid](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket) candles via [websocket](https://github.com/gorilla/websocket).
+This is a small [Go](https://go.dev/) test project, designed to retrieve candle data from [hyperfluid](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket) via a [websocket](https://github.com/gorilla/websocket) connection and save them to a local [json](https://github.com/sdomino/scribble) database.
 
-The data is parsed and written to a local [json](https://github.com/sdomino/scribble) database.
+### Test
+```shell
+... // coming soon!
+```
+
+### Build
+```shell
+go build
+```
 
 ### Usage
 
-To build / run
-
 ```shell
-go [build / run] main.go -coin=<coin> -interval=<1m|5m|15m|1h>
+./hyperfluid -coin=<coin> -interval=<1m|5m|15m|1h>
 
 // (defaults)
 // coin: xyz:SP500

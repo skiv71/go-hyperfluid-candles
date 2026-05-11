@@ -6,14 +6,14 @@ import (
 	"sync"
 
 	"github.com/sdomino/scribble"
-	"github.com/skiv71/go-shit/internal/candle"
-	"github.com/skiv71/go-shit/internal/config"
-	"github.com/skiv71/go-shit/internal/exchange"
+	"github.com/skiv71/hyperfluid/internal/candle"
+	"github.com/skiv71/hyperfluid/internal/config"
+	"github.com/skiv71/hyperfluid/internal/exchange"
 )
 
-func main() {
+const COLLECTION = "candles"
 
-	collection := "candles"
+func main() {
 
 	cfg := config.Get()
 
@@ -37,7 +37,7 @@ func main() {
 		data := <-feed
 		log.Print("candle: ", data)
 		file := strings.Replace(data.Timestamp, " ", "_", 1)
-		if err := db.Write(collection, file, &data); err != nil {
+		if err := db.Write(COLLECTION, file, &data); err != nil {
 			log.Fatal(err)
 		}
 	}

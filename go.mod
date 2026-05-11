@@ -1,4 +1,4 @@
-module github.com/skiv71/go-shit
+module github.com/skiv71/hyperfluid
 
 go 1.26.2
 
