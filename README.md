@@ -2,7 +2,9 @@
 
 ### Description
 
-This is a small [Go](https://go.dev/) test project, designed to retrieve candle data from [hyperfluid](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket) via a [websocket](https://github.com/gorilla/websocket) connection and save them to a local [json](https://github.com/sdomino/scribble) database.
+This is a small [Go](https://go.dev/) test project.
+
+It's designed to retrieve candle data from [hyperfluid](https://hyperliquid.gitbook.io/hyperliquid-docs/for-developers/api/websocket) via a [websocket](https://github.com/gorilla/websocket) connection and save them to a local [json](https://github.com/sdomino/scribble) database.
 
 ### Test
 ```shell
