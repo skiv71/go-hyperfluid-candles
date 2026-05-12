@@ -11,13 +11,7 @@ import (
 	"github.com/skiv71/hyperliquid/internal/exchange"
 )
 
-const COLLECTION = "candles"
-
-func main() {
-
-	cfg := config.Get()
-
-	log.Print("config: ", cfg)
+func streamCandles(cfg *config.Config) {
 
 	db, err := scribble.New("./data/", nil)
 
@@ -27,19 +21,34 @@ func main() {
 
 	var wg sync.WaitGroup
 
-	feed := make(chan candle.Object)
+	channel := make(chan candle.Object)
 
 	wg.Go(func() {
-		exchange.Feed(cfg.Coin, cfg.Interval, feed)
+		exchange.Candles(cfg.Coin, cfg.Interval, channel)
 	})
 
 	for {
-		data := <-feed
+		data := <-channel
 		log.Print("candle: ", data)
 		file := strings.Replace(data.Timestamp, " ", "_", 1)
-		if err := db.Write(COLLECTION, file, &data); err != nil {
+		if err := db.Write(cfg.Stream, file, &data); err != nil {
 			log.Fatal(err)
 		}
+	}
+
+}
+
+func main() {
+
+	cfg := config.Get()
+
+	log.Print("config: ", cfg)
+
+	switch cfg.Stream {
+	case "candles":
+		streamCandles(&cfg)
+	default:
+		log.Fatalf("Invalid stream: %s", cfg.Stream)
 	}
 
 }

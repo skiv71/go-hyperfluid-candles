@@ -10,4 +10,7 @@ func TestGet(t *testing.T) {
 	if cfg.Interval != DEFAULT_INTERVAL {
 		t.Errorf("Invalid Config.Interval: %s; expected: %s", cfg.Interval, DEFAULT_INTERVAL)
 	}
+	if cfg.Stream != DEFAULT_STREAM {
+		t.Errorf("Invalid Config.Stream: %s; expected: %s", cfg.Stream, DEFAULT_STREAM)
+	}
 }
