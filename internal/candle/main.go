@@ -35,27 +35,6 @@ type Subscription struct {
 	Interval string `json:"interval"`
 }
 
-func Interval(s *string) int {
-	v := 0
-	suffix := map[string]int{
-		"m": 60,
-		"h": 60 * 60,
-	}
-	for _, r := range *s {
-		c := string(r)
-		i, err := strconv.ParseInt(c, 10, 64)
-		if err == nil {
-			v += int(i)
-		} else {
-			m, ok := suffix[c]
-			if ok {
-				return v * m
-			}
-		}
-	}
-	return v
-}
-
 func parseFloat(v *string) string {
 	f, err := strconv.ParseFloat(*v, 32)
 	if err != nil {

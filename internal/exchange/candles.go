@@ -6,7 +6,7 @@ import (
 	"net/url"
 
 	"github.com/gorilla/websocket"
-	"github.com/skiv71/hyperfluid/internal/candle"
+	"github.com/skiv71/hyperliquid/internal/candle"
 )
 
 type subscribe struct {
@@ -40,7 +40,7 @@ type message struct {
 	Data    candle.Data `json:"data"`
 }
 
-func Feed(coin string, interval string, feed chan candle.Object) {
+func Candles(coin string, interval string, channel chan candle.Object) {
 
 	u := url.URL{
 		Scheme: "wss",
@@ -79,7 +79,7 @@ func Feed(coin string, interval string, feed chan candle.Object) {
 		}
 
 		if m.Channel == `candle` {
-			feed <- candle.Parse(&m.Data)
+			channel <- candle.Parse(&m.Data)
 		} else {
 			log.Print("receive: ", string(data))
 		}
