@@ -7,9 +7,13 @@ type Config struct {
 	Interval string
 }
 
+const DEFAULT_COIN = `xyz:SP500`
+
+const DEFAULT_INTERVAL = `5m`
+
 func Get() Config {
-	coin := flag.String("coin", "xyz:SP500", "-coin=<coin>")
-	interval := flag.String("interval", "5m", "-interval=<1m|5m|15m|1h>")
+	coin := flag.String("coin", DEFAULT_COIN, "-coin=<coin>")
+	interval := flag.String("interval", DEFAULT_INTERVAL, "-interval=<1m|5m|15m|1h>")
 	flag.Parse()
 	return Config{
 		Coin:     *coin,

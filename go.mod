@@ -1,4 +1,4 @@
-module github.com/skiv71/hyperfluid
+module github.com/skiv71/hyperliquid
 
 go 1.26.2
 

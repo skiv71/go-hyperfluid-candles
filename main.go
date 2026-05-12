@@ -6,9 +6,9 @@ import (
 	"sync"
 
 	"github.com/sdomino/scribble"
-	"github.com/skiv71/hyperfluid/internal/candle"
-	"github.com/skiv71/hyperfluid/internal/config"
-	"github.com/skiv71/hyperfluid/internal/exchange"
+	"github.com/skiv71/hyperliquid/internal/candle"
+	"github.com/skiv71/hyperliquid/internal/config"
+	"github.com/skiv71/hyperliquid/internal/exchange"
 )
 
 const COLLECTION = "candles"
