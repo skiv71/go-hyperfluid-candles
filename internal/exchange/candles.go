@@ -70,6 +70,7 @@ func Candles(coin string, interval string, channel chan candle.Object) {
 
 		if err != nil {
 			log.Println(err)
+			continue
 		}
 
 		m := message{}
